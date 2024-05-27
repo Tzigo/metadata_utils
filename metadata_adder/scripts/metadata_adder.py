@@ -31,7 +31,7 @@ def on_ui_tabs():
                 button = gr.Button(value="Add Metadata", variant="primary")
             gr.Column(scale=1)
 
-        button.click(on_button, inputs=[input_file, new_name, json_input, label1])
+        button.click(on_button, inputs=[input_file, new_name, json_input])
         return [(ui_component, "Metadata Adder", "extension_template_tab")]
 
 
