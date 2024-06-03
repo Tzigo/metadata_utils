@@ -22,8 +22,8 @@ def on_ui_tabs():
                     max_lines=1, elem_id="new_name", label="New Name")
 
             with gr.Row():
-                json_input = gr.Textbox(placeholder='Input JSON content', max_lines=10, elem_id="json_input",
-                                        label="Metadata as JSON (SHIFT + SPACE = new line)")
+                json_input = gr.Code(placeholder='Input JSON content', max_lines=10, elem_id="json_input",
+                                     label="Metadata as JSON", language="json")
 
             with gr.Row():
                 gr.Column(scale=1)
@@ -38,7 +38,7 @@ def on_ui_tabs():
                 create_refresh_button(input_file, models.list_models,
                                       lambda: {"choices": models.checkpoint_tiles()}, "refresh")
             with gr.Row():
-                metadata = gr.TextArea(label="Metadata")
+                metadata = gr.Code(label="Metadata", language="json")
 
             input_file.change(
                 fn=on_button_load_metadata,
