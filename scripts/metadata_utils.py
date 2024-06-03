@@ -54,7 +54,9 @@ script_callbacks.on_ui_tabs(on_ui_tabs)
 
 def on_button_load_metadata(input_file: str):
     if selected_model := models.get_closet_checkpoint_match(input_file):
-        return json.dumps(selected_model.metadata, indent=4, ensure_ascii=False) if selected_model.metadata else 'No metadata'
+        if metadata := models.read_metadata_from_safetensors(selected_model.filename):
+            return json.dumps(metadata, indent=4, ensure_ascii=False)
+        return 'No metadata'
     return 'Model not found'
 
 
