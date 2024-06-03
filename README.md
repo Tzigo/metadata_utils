@@ -1,4 +1,5 @@
-# Metadata-Adder
+# Metadata_Utils
 Write metadata in safetensor checkpoints
-![screenshot](https://github.com/Tzigo/Metadata-Adder/assets/170231895/fc3993ea-ffa1-4e71-a39e-77d5dc7c713c)
+
+![Unbenannt](https://github.com/Tzigo/Metadata_Utils/assets/170231895/fc2634cd-8ac7-4233-86d7-7e3dca7a9414)
 
