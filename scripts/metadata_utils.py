@@ -19,10 +19,10 @@ def on_ui_tabs():
             with gr.Row():
                 new_name = gr.Textbox(
                     placeholder='(Optional) Enter new checkpoint name. If omitted, appends "_md" to name',
-                    max_lines=1, elem_id="new_name", label="New Name")
+                    max_lines=1, label="New Name")
 
             with gr.Row():
-                json_input = gr.Code(placeholder='Input JSON content', max_lines=10, elem_id="json_input",
+                json_input = gr.Code(placeholder='Input JSON content', max_lines=10,
                                      label="Metadata as JSON", language="json")
 
             with gr.Row():
