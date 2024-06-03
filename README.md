@@ -9,6 +9,6 @@ If support for other WebUIs is required, please create a pull request.
 
 Installation:
 
-To install in the WebUI, clone this repository under Extensions -> Install from URL or simply copy and paste here https://github.com/Tzigo/Metadata_Utils.git.
+To install in the WebUI, clone this repository under Extensions -> Install from URL or simply copy and paste here https://github.com/Tzigo/metadata_utils.git.
 
 Click on install and then restart the UI.
