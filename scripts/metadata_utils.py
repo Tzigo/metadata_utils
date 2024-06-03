@@ -14,7 +14,7 @@ def on_ui_tabs():
             with gr.Row():
                 input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
                 create_refresh_button(input_file, models.list_models,
-                                      lambda: {"choices": models.checkpoint_tiles()}, "refresh")
+                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_1")
 
             with gr.Row():
                 new_name = gr.Textbox(
@@ -36,7 +36,7 @@ def on_ui_tabs():
             with gr.Row():
                 input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
                 create_refresh_button(input_file, models.list_models,
-                                      lambda: {"choices": models.checkpoint_tiles()}, "refresh")
+                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_2")
             with gr.Row():
                 metadata = gr.Code(label="Metadata", language="json")
 
