@@ -16,6 +16,11 @@ def on_ui_tabs():
                 create_refresh_button(input_file, models.list_models,
                                       lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_1")
 
+                button = gr.Button(value="Add Metadata", variant="primary")
+
+            gr.HTML("<p style=\"text-align:center;color:red\">Warning! Changing the metadata of "
+                    "your checkpoint also changes it's hash</p>")
+
             with gr.Row():
                 new_name = gr.Textbox(
                     placeholder='(Optional) Enter new checkpoint name. If omitted, appends "_md" to name',
@@ -25,13 +30,8 @@ def on_ui_tabs():
                 json_input = gr.Code(placeholder='Input JSON content', max_lines=10,
                                      label="Metadata as JSON", language="json")
 
-            with gr.Row():
-                gr.Column(scale=1)
-                with gr.Column(scale=1):
-                    button = gr.Button(value="Add Metadata", variant="primary")
-                gr.Column(scale=1)
-
             button.click(on_button, inputs=[input_file, new_name, json_input])
+
         with gr.Tab("Reader"):
             with gr.Row():
                 input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
@@ -73,7 +73,8 @@ def on_button(input_file: str, new_name: str, json_input: str):
     selected_model_path = Path(selected_model.filename)
 
     # If new_name is omitted, replace old file
-    new_path = selected_model_path.with_stem(new_name) if new_name else selected_model_path.with_stem(f'{selected_model_path.stem}_md')
+    new_path = selected_model_path.with_stem(new_name) if new_name else selected_model_path.with_stem(
+        f'{selected_model_path.stem}_md')
 
     if new_path.exists():
         gr.Warning("Name already existing!")
