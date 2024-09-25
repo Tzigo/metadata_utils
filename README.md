@@ -1,7 +1,7 @@
 # Metadata Utils
 Unfortunately, the SuperMerger does not save the metadata when merging checkpoints or Loras. Since I like to have an overview of what is in each checkpoint or Lora, I wrote a small extension for the WebUI. Automatic1111 and ForgeUI are currently supported.
 
-My Metadata Utils can read metadata from .Savetensor files and also write them.
+My Metadata Utils can read metadata from .savetensor files and also write them.
 
 If support for other WebUIs is required, please create a pull request.
 
