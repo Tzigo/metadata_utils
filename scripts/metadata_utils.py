@@ -10,41 +10,79 @@ from modules import script_callbacks
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as ui_component:
+        
+        with gr.Tab("Reader"):
+            with gr.Tab("Checkpoint"):
+                        with gr.Row():
+                            input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
+                            create_refresh_button(input_file, models.list_models,
+                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_2")
+                        with gr.Row():
+                            metadata = gr.Code(label="Metadata", language="json")
+
+                            input_file.change(
+                            fn=on_button_load_metadata,
+                            inputs=[input_file],
+                            outputs=[metadata]
+                        )
+            with gr.Tab("Lora"):
+                            with gr.Row():
+                                input_file = gr.Dropdown(models.checkpoint_tiles(), label="Lora")
+                                create_refresh_button(input_file, models.list_models,
+                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_2")
+                            with gr.Row():
+                                metadata = gr.Code(label="Metadata", language="json")
+
+                                input_file.change(
+                                fn=on_button_load_metadata,
+                                inputs=[input_file],
+                                outputs=[metadata]
+            )
+            
         with gr.Tab("Adder"):
-            with gr.Row():
-                input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
-                create_refresh_button(input_file, models.list_models,
+            with gr.Tab("Checkpoint"):
+                            with gr.Row():
+                                input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
+                                create_refresh_button(input_file, models.list_models,
                                       lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_1")
 
-                button = gr.Button(value="Add Metadata", variant="primary")
+                                button = gr.Button(value="Add Metadata", variant="primary")
 
-            gr.HTML("<p style=\"text-align:center;color:red\">Warning! Changing the metadata of "
-                    "your checkpoint also changes it's hash</p>")
+                            gr.HTML("<p style=\"text-align:center;color:red\">Warning! Changing the metadata of "
+                                    "your checkpoint also changes it's hash</p>")
 
-            with gr.Row():
-                new_name = gr.Textbox(
-                    placeholder='(Optional) Enter new checkpoint name. If omitted, appends "_md" to name',
-                    max_lines=1, label="New Name")
+                            with gr.Row():
+                                    new_name = gr.Textbox(
+                                    placeholder='(Optional) Enter new checkpoint name. If omitted, appends "_md" to name',
+                                    max_lines=1, label="New Name")
 
-            with gr.Row():
-                json_input = gr.Code(placeholder='Input JSON content', max_lines=10,
-                                     label="Metadata as JSON", language="json")
+                            with gr.Row():
+                                    json_input = gr.Code(lines=10,
+                                                        label="Metadata as JSON", language="json")
 
-            button.click(on_button, inputs=[input_file, new_name, json_input])
+                            button.click(on_button, inputs=[input_file, new_name, json_input])
+            with gr.Tab("Lora"):
+                        with gr.Row():
+                                input_file = gr.Dropdown(models.checkpoint_tiles(), label="Lora")
+                                create_refresh_button(input_file, models.list_models,
+                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_1")
 
-        with gr.Tab("Reader"):
-            with gr.Row():
-                input_file = gr.Dropdown(models.checkpoint_tiles(), label="Checkpoint")
-                create_refresh_button(input_file, models.list_models,
-                                      lambda: {"choices": models.checkpoint_tiles()}, "metadata_utils_refresh_2")
-            with gr.Row():
-                metadata = gr.Code(label="Metadata", language="json")
+                                button = gr.Button(value="Add Metadata", variant="primary")
 
-            input_file.change(
-                fn=on_button_load_metadata,
-                inputs=[input_file],
-                outputs=[metadata]
-            )
+                        gr.HTML("<p style=\"text-align:center;color:red\">Warning! Changing the metadata of "
+                                    "your model also changes it's hash</p>")
+
+                        with gr.Row():
+                                    new_name = gr.Textbox(
+                                    placeholder='(Optional) Enter new model name. If omitted, appends "_md" to name',
+                                    max_lines=1, label="New Name")
+
+                        with gr.Row():
+                                        json_input = gr.Code(lines=10,
+                                        label="Metadata as JSON", language="json")
+
+                        button.click(on_button, inputs=[input_file, new_name, json_input])                    
+
 
     return [(ui_component, "Metadata Utils", "metadata_utils_tab")]
 
@@ -63,7 +101,7 @@ def on_button_load_metadata(input_file: str):
 def on_button(input_file: str, new_name: str, json_input: str):
     selected_model = models.get_closet_checkpoint_match(input_file)
     if not selected_model:
-        gr.Warning("Please select a checkpoint")
+        gr.Warning("Please select a model")
         return
 
     if not selected_model.is_safetensors:
@@ -87,10 +125,10 @@ def on_button(input_file: str, new_name: str, json_input: str):
         gr.Warning("Input is not valid JSON")
         return
 
-    log("Saving Checkpoint...")
+    log("Saving Model...")
     # save extracted checkpoints into new file, along with metadata
     write_metadata(selected_model.filename, mdata, str(new_path))
-    log("Saved Checkpoint!")
+    log("Saved Model!")
 
 
 def log(message):
