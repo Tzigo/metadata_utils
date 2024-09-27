@@ -1,8 +1,10 @@
 import modules.sd_models as models
 import os
 
+import modules.shared
+
 lora_list = []
-lora_path = os.path.join(models.paths.models_path, "Lora")
+lora_path = modules.shared.cmd_opts.lora_path or os.path.join(models.paths.models_path, "Lora")
 
 
 def list_loras():
@@ -38,9 +40,6 @@ class LoraFileImitat:
 
 
 def get_lora_on_button(lora):
-    print(lora_path)
-    print(lora)
-    print(os.path.isfile(os.path.join(lora_path, lora)))
     if not os.path.isfile(os.path.join(lora_path, lora)):
         return None
     return LoraFileImitat(lora)

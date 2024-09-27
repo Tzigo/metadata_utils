@@ -1,5 +1,6 @@
 import gradio as gr
 import modules.sd_models as models
+import modules.shared
 from modules.ui import create_refresh_button
 from metadata_util_lib import write_metadata
 import metadata_utils_file_utils as file_utils
