@@ -4,7 +4,7 @@ import os
 import modules.shared
 
 lora_list = []
-lora_path = getattr(modules.shared.cmd_opts, "lora_path", os.path.join(models.paths.models_path, "Lora"))
+lora_path = getattr(modules.shared.cmd_opts, "lora_dir", os.path.join(models.paths.models_path, "Lora"))
 
 
 def list_loras():
