@@ -5,7 +5,7 @@ My Metadata Utils can read metadata from .savetensor files and also write them.
 
 If support for other WebUIs is required, please create a pull request.
 
-![Unbenannt](https://github.com/Tzigo/metadata_utils/assets/170231895/6fc5f0f7-a45c-4f62-8a6c-468b83bb59dc)
+![meta](https://github.com/user-attachments/assets/426207ed-5c73-4eda-b241-27d543621b96)
 
 
 Installation:
